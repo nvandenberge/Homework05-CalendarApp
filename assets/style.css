@@ -33,7 +33,7 @@ textarea{
 .row {
   white-space: pre-wrap;
   height: 80px;
-  border-top: 1px solid white;;
+  border-top: 1px solid white;
 }
 
 .hour {
@@ -63,9 +63,20 @@ textarea{
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
+  padding: 25px 35px;  /* centers the saveIcon */
+}
+
+/* Hover feedback on save */
+.saveBtn:hover {
+  cursor: pointer;
 }
 
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+.timeColumn {
+  border-bottom: 1px solid black;
+  padding-top: 30px;
 }

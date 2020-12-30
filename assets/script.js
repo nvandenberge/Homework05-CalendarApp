@@ -1,30 +1,35 @@
-// Using moment.js to display the current date at top
+// using Moment.js to display the current date at top
 $("#currentDay").text(moment().format("dddd, MMMM Do YYYY"));
 
-// Array of hourly timeslots
-const $dailyHours = [
-  "9 am",
-  "10 am",
-  "11 am",
-  "12 pm",
-  "1 pm",
-  "2 pm",
-  "3 pm",
-  "4 pm",
-  "5 pm",
-];
+// generates array of timeSlots between 9am-5pm using Moment.js and While loop
+const $startTime = moment().utc().set({ hour: 9, minute: 00 });
+const $endTime = moment().utc().set({ hour: 17, minute: 00 });
+const $timeSlots = [];
 
-$.each($dailyHours, function (index, hour) {
-// Buiding planner elements using Bootstrap grid
-  let $hourlyRow = $("<div>").addClass("row");
-  let $timeColumn = $("<div>").addClass("col-1 timeColumn");
-  let $eventColumn = $("<div>").addClass("col-9 eventColumn");
-  let $saveColumn = $("<div>").addClass("col-2 saveColumn");
+while ($startTime <= $endTime) {
+  $timeSlots.push(new moment($startTime));
+  $startTime.add(1, "hour");
+}
+
+// grabs the current time, used to compare against timestamps in timeSlots array
+const $currentHour = moment();
+
+// loops through timeSlots array and creates required elements for each
+$.each($timeSlots, function(index, hour) {
+  // creating planner elements using Bootstrap grid
+  const $hourlyRow = $("<div>").addClass("row");
+  const $timeColumn = $("<div>").addClass("col-2 time-block timeColumn");
+  const $eventInput = $("<textarea>")
+    .attr("type", "text")
+    .addClass("col-9 eventColumn eventInput textarea")
+    .attr("id", "hour" + hour.hour());
+  const $saveBtn = $("<div>").addClass("col-1 saveBtn");
+  const $saveIcon = $("<i>").addClass("far fa-save saveIcon");
+
   $(".container").append($hourlyRow);
-  $timeColumn.text(hour);
+  $timeColumn.text(hour.format("h A"));
   $hourlyRow.append($timeColumn);
-  $eventColumn.text('This is an event');
-  $hourlyRow.append($eventColumn)
-  $saveColumn.text('saveIcon');
-  $hourlyRow.append($saveColumn)
+  $hourlyRow.append($eventInput);
+  $hourlyRow.append($saveBtn);
+  $saveBtn.append($saveIcon);
 });
