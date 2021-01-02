@@ -11,7 +11,7 @@ $(document).ready(function() {
 // using Moment.js to display the current date at top
 $("#currentDay").text(moment().format("dddd, MMMM Do YYYY"));
 
-// generates array of timeSlots between 9am-5pm using Moment.js and While loop
+// generates array of timeSlots between a set start & end time
 const $startTime = moment().utc().set({ hour: 9, minute: 00 });
 const $endTime = moment().utc().set({ hour: 17, minute: 00 });
 const $timeSlots = [];
@@ -29,13 +29,28 @@ const $currentHour = moment();
 $.each($timeSlots, function(index, hour) {
   // creating planner elements using Bootstrap grid
   const $hourlyRow = $("<div>").addClass("row");
-  const $timeColumn = $("<div>").addClass("col-2 time-block timeColumn");
+  const $timeColumn = $("<div>").addClass("col-1 timeColumn");
   const $eventInput = $("<textarea>")
     .attr("type", "text")
-    .addClass("col-9 eventColumn eventInput textarea")
+    .addClass("col-10 eventColumn eventInput textarea")
     .attr("id", "hour" + hour.hour());
   const $saveBtn = $("<div>").addClass("col-1 saveBtn");
   const $saveIcon = $("<i>").addClass("far fa-save saveIcon");
+
+  // comparing current time against calendar and adjusting timeSlot colors accordingly
+  if($currentHour.hour() > hour.hour()) {
+    $eventInput.addClass("past");
+    $saveBtn.addClass("past")
+    $eventInput.prop("disabled", true)
+  }
+
+  if($currentHour.hour() === hour.hour()) {
+    $eventInput.addClass("present");
+  }
+
+  if($currentHour.hour() < hour.hour()) {
+    $eventInput.addClass("future");
+  }
 
   // adding planner elements to container
   $(".container").append($hourlyRow);
