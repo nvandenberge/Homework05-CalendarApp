@@ -13,5 +13,5 @@ A work day schedule app that allows users to input daily scheduled events. Work 
 ![Work Day Scheduler](./assets/images/homework05-mockup.png)
 
 ## Demo
-- https://nvandenberge.github.io/Homework05-CalendarApp/
+- https://nvandenberge.github.io/Homework05-WorkDayScheduler/
 
