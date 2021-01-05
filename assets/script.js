@@ -32,7 +32,7 @@ $.each($timeSlots, function(index, hour) {
   const $timeColumn = $("<div>").addClass("col-1 timeColumn");
   const $eventInput = $("<textarea>")
     .attr("type", "text")
-    .addClass("col-10 eventColumn eventInput textarea")
+    .addClass("col-9 eventColumn eventInput textarea")
     .attr("id", "hour" + hour.hour());
   const $saveBtn = $("<div>").addClass("col-1 saveBtn");
   const $saveIcon = $("<i>").addClass("far fa-save saveIcon");
