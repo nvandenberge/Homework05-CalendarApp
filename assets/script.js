@@ -41,7 +41,7 @@ $.each($timeSlots, function(index, hour) {
   if($currentHour.hour() > hour.hour()) {
     $eventInput.addClass("past");
     $saveBtn.addClass("past")
-    $eventInput.prop("disabled", true)
+    // $eventInput.prop("disabled", true)
   }
 
   if($currentHour.hour() === hour.hour()) {
